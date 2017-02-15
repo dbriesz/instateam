@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/instateam.iml" filepath="$PROJECT_DIR$/.idea/modules/instateam.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/instateam_main.iml" filepath="$PROJECT_DIR$/.idea/modules/instateam_main.iml" group="instateam" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/instateam_test.iml" filepath="$PROJECT_DIR$/.idea/modules/instateam_test.iml" group="instateam" />
+    </modules>
+  </component>
+</project>
