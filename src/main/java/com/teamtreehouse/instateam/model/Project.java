@@ -19,10 +19,10 @@ public class Project {
 
     private String status;
 
-    @ManyToMany(mappedBy = "project")
+    @ManyToMany
     private List<Role> rolesNeeded = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "project")
+    @ManyToMany
     private List<Collaborator> collaborators = new ArrayList<>();
 
     public Project() {}
