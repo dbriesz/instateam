@@ -19,7 +19,7 @@ public class CollaboratorDaoImpl implements CollaboratorDao {
         // Open a session
         Session session = sessionFactory.openSession();
 
-        // Get all collaborators with a Hibernate criteria
+        // Get all collaborator with a Hibernate criteria
         List<Collaborator> collaborators = session.createCriteria(Collaborator.class).list();
 
         // Close session

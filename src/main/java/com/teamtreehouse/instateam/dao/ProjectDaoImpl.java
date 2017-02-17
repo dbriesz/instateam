@@ -17,7 +17,7 @@ public class ProjectDaoImpl implements ProjectDao {
         // Open a session
         Session session = sessionFactory.openSession();
 
-        // Get all projects with a Hibernate criteria
+        // Get all project with a Hibernate criteria
         List<Project> projects = session.createCriteria(Project.class).list();
 
         // Close session

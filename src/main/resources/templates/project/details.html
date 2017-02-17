@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html>
-    <head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout :: head('project details')">
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>InstaTeam</title>
@@ -13,16 +13,16 @@
         <header>
             <div class="container">
                 <div class="site-header">
-                    <a class="logo" href="index.html">InstaTeam</a>
+                    <a class="logo" href="../index.html">InstaTeam</a>
                     <a class="new-project button icon-left" href="#"><i class="material-icons">add</i> New Project</a>
                 </div>
             </div>
         </header>
         <nav>
             <ul>
-                <li class="selected"><a href="index.html">Projects</a></li>
-                <li><a href="collaborators.html">Collaborators</a></li>
-                <li><a href="roles.html">Roles</a></li>
+                <li class="selected"><a href="../index.html">Projects</a></li>
+                <li><a href="../collaborator/index.html">Collaborators</a></li>
+                <li><a href="../role/index.html">Roles</a></li>
             </ul>
         </nav>
         <section>
@@ -53,8 +53,8 @@
                         </div>
                     </div>
                     <div class="actions">
-                        <a class="button" href="edit_project.html">Edit Project</a>
-                        <a class="button" href="project_collaborators.html">Edit Collaborators</a>
+                        <a class="button" href="index.html">Edit Project</a>
+                        <a class="button" href="../collaborator/details.html">Edit Collaborators</a>
                     </div>
                 </div>
             </div>
