@@ -27,49 +27,49 @@
         </nav>
         <section>
             <div class="container wrapper">
-                <form>
+                <form th:action="@{/projects}" method="post" th:object="${project}">
                     <div>
                         <label for="project_name"> Project Name:</label>
-                        <input type="text" name="project_name">
+                        <input type="text" th:field="*{name}" name="project_name">
                     </div>
                     <div>
                         <label for="project_description">Project Description:</label>
-                        <textarea rows="4" name="project_description"></textarea>
+                        <textarea th:field="*{description}" rows="4" name="project_description"></textarea>
                     </div>
                     <div>
                         <label for="project_status">Project Status:</label>
                         <div class="custom-select">
                         <span class="dropdown-arrow"></span>
-                            <select name="project_status">
-                                <option value="active">Active</option>
-                                <option value="archived">Archived</option>
-                                <option value="not_started">Not Started</option>
-                            </select>
+                            <select th:field="*{status}" name="project_status">
+                                <option th:value="active" th:text="Active">Active</option>
+                                <option th:value="archived" th:text="Archived">Archived</option>
+                                <option th:value="not_started" th:text="Not Started">Not Started</option>
+=                            </select>
                         </div>
                     </div>
                     <div>
                         <label for="project_roles">Project Roles:</label>
                         <ul class="checkbox-list">
                             <li>
-                                <input type="checkbox" name="project_roles" value="Developer">
+                                <input type="checkbox" name="project_roles" value="Developer"/>
                                 <span class="primary"> Developer</span>
                             </li>
                             <li>
-                                <input type="checkbox" name="project_roles" value="Designer">
+                                <input type="checkbox" name="project_roles" value="Designer"/>
                                 <span class="primary"> Designer</span>
                             </li>
                             <li>
-                                <input type="checkbox" name="project_roles" value="QA">
+                                <input type="checkbox" name="project_roles" value="QA"/>
                                 <span class="primary"> QA</span>
                             </li>
                             <li>
-                                <input type="checkbox" name="project_roles" value="DevOps">
+                                <input type="checkbox" name="project_roles" value="DevOps"/>
                                 <span class="primary"> DevOps</span>
                             </li>
                         </ul>
                     </div>
                     <div class="actions">
-                        <input type="submit" value="Save" class="button">
+                        <input type="submit" value="Save" class="button"/>
                         <a href="#" class="button button-secondary">Cancel</a>
                     </div>
                 </form>

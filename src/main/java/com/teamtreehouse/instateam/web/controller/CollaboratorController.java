@@ -39,6 +39,7 @@ public class CollaboratorController {
     @RequestMapping("collaborators/add")
     public String formNewCollaborator(Model model) {
         // TODO: Add model attributes needed for new form
+        model.addAttribute("collaborator", new Collaborator());
 
         return "collaborator/details";
     }
@@ -62,11 +63,12 @@ public class CollaboratorController {
 
     // Add a collaborator
     @RequestMapping(value = "/collaborators", method = RequestMethod.POST)
-    public String addCollaborator() {
+    public String addCollaborator(Collaborator collaborator) {
         // TODO: Add collaborator if valid data was received
+        collaboratorService.save(collaborator);
 
         // TODO: Redirect browser to /collaborators
-        return null;
+        return "redirect:/collaborators";
     }
 
     // Delete an existing collaborator

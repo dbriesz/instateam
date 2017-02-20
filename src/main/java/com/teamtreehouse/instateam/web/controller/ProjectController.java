@@ -40,6 +40,7 @@ public class ProjectController {
     @RequestMapping("projects/add")
     public String formNewProject(Model model) {
         // TODO: Add model attributes needed for new form
+        model.addAttribute("project", new Project());
 
         return "project/index";
     }
@@ -63,11 +64,12 @@ public class ProjectController {
 
     // Add a project
     @RequestMapping(value = "/projects", method = RequestMethod.POST)
-    public String addProject() {
+    public String addProject(Project project) {
         // TODO: Add project if valid data was received
+        projectService.save(project);
 
         // TODO: Redirect browser to home page
-        return null;
+        return "redirect:/projects";
     }
 
     // Delete an existing project

@@ -34,15 +34,16 @@ public class RoleController {
         Role role = null;
 
         model.addAttribute("role", role);
-        return "role/details";
+        return "role/index";
     }
 
     // Form for adding a new role
     @RequestMapping("roles/add")
     public String formNewRole(Model model) {
         // TODO: Add model attributes needed for new form
+        model.addAttribute("role", new Role());
 
-        return "role/details";
+        return "role/index";
     }
 
     // Form for editing an existing role
@@ -50,7 +51,7 @@ public class RoleController {
     public String formEditRole(@PathVariable Long roleId, Model model) {
         // TODO: Add model attributes needed for edit form
 
-        return "role/details";
+        return "role/index";
     }
 
     // Update an existing role
@@ -64,11 +65,12 @@ public class RoleController {
 
     // Add a role
     @RequestMapping(value = "/roles", method = RequestMethod.POST)
-    public String addRole() {
+    public String addRole(Role role) {
         // TODO: Add role if valid data was received
+        roleService.save(role);
 
         // TODO: Redirect browser to /roles
-        return null;
+        return "redirect:/roles";
     }
 
     // Delete an existing role

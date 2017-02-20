@@ -27,7 +27,7 @@
         </nav>
         <section>
             <div class="container wrapper">
-                <form>
+                <form th:action="@{/collaborators}" method="post">
                     <h2>Manage Collaborators</h2>
                     <ul class="checkbox-list">
                         <li>
@@ -68,7 +68,7 @@
                         </li>
                     </ul>
                     <div class="actions add-new-collaborator">
-                        <input type="text" placeholder="Name...">
+                        <input type="text" placeholder="Name..."/>
                         <div class="custom-select">
                             <span class="dropdown-arrow"></span>
                             <select>

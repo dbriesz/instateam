@@ -24,7 +24,7 @@ public class CollaboratorServiceImpl implements CollaboratorService {
 
     @Override
     public void save(Collaborator collaborator) {
-
+        collaboratorDao.save(collaborator);
     }
 
     @Override

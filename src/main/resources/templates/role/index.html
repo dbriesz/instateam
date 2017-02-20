@@ -13,34 +13,30 @@
         <header>
             <div class="container">
                 <div class="site-header">
-                    <a class="logo" href="../index.html">InstaTeam</a>
-                    <a class="new-project button icon-left" href="/projects/add"><i class="material-icons">add</i> New Project</a>
+                    <a class="logo" th:href="@{/}">InstaTeam</a>
+                    <a class="new-project button icon-left" th:href="@{/projects/add}"><i class="material-icons">add</i> New Project</a>
                 </div>
             </div>
         </header>
         <nav>
             <ul>
-                <li><a href="../index.html">Projects</a></li>
-                <li><a href="../collaborator/index.html">Collaborators</a></li>
-                <li class="selected"><a href="index.html">Roles</a></li>
+                <li><a th:href="@{/}">Projects</a></li>
+                <li><a th:href="@{/collaborators}">Collaborators</a></li>
+                <li class="selected"><a th:href="@{/roles}">Roles</a></li>
             </ul>
         </nav>
         <section>
             <div class="container wrapper">
-                <form>
+                <form th:action="@{/roles}" method="get" th:object="${role}">
                     <h2>Manage Roles</h2>
-                    <div>
+                    <div th:each="role : ${roles}">
                         <ul class="checkbox-list">
-                            <li><span class="primary">Developer</span></li>
-                            <li><span class="primary">Designer</span></li>
-                            <li><span class="primary">QA</span></li>
-                            <li><span class="primary">DevOps</span></li>
-                            <li><span class="primary">Copywriter</span></li>
+                            <li th:href="@{|/roles/${role.id}|}" th:text="${role.name}"><span class="primary">Developer</span></li>
                         </ul>
                     </div>
                     <div class="actions add-new-role">
-                        <input type="text" placeholder="New Role...">
-                        <a class="button" href="#">Add</a>
+                        <input type="text" th:field="*{name}" placeholder="New Role..."/>
+                        <a class="button" th:href="@{/roles}">Add</a>
                     </div>
                 </form>
             </div>
