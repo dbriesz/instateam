@@ -16,7 +16,7 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
-    // Index of all role
+    // Index of all roles
     @SuppressWarnings("unchecked")
     @RequestMapping("/roles")
     public String listRoles(Model model) {
@@ -31,7 +31,7 @@ public class RoleController {
     @RequestMapping("/roles/{roleId}")
     public String role(@PathVariable Long roleId, Model model) {
         // Get the role given by projectId
-        Role role = null;
+        Role role = roleService.findById(roleId);
 
         model.addAttribute("role", role);
         return "role/index";

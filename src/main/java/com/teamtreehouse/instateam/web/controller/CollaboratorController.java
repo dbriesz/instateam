@@ -14,7 +14,7 @@ public class CollaboratorController {
     @Autowired
     private CollaboratorService collaboratorService;
 
-    // Index of all collaborator
+    // Index of all collaborators
     @SuppressWarnings("unchecked")
     @RequestMapping("/collaborators")
     public String listCollaborators(Model model) {

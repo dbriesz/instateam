@@ -27,15 +27,15 @@
         </nav>
         <section>
             <div class="container wrapper">
-                <form th:action="@{/roles}" method="get" th:object="${role}">
+                <form th:action="@{/roles}" method="post" th:object="${role}">
                     <h2>Manage Roles</h2>
                     <div th:each="role : ${roles}">
                         <ul class="checkbox-list">
-                            <li th:href="@{|/roles/${role.id}|}" th:text="${role.name}"><span class="primary">Developer</span></li>
+                            <li><span th:href="@{|/roles/${id}|}" th:text="${name}" class="primary">Developer</span></li>
                         </ul>
                     </div>
                     <div class="actions add-new-role">
-                        <input type="text" th:field="*{name}" placeholder="New Role..."/>
+                        <input type="text" th:text="${name}" placeholder="New Role..."/>
                         <a class="button" th:href="@{/roles}">Add</a>
                     </div>
                 </form>
