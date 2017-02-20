@@ -29,14 +29,15 @@
             <div class="container wrapper">
                 <form th:action="@{/roles}" method="post" th:object="${role}">
                     <h2>Manage Roles</h2>
-                    <div th:each="role : ${roles}">
-                        <ul class="checkbox-list">
-                            <li><span th:href="@{|/roles/${id}|}" th:text="${name}" class="primary">Developer</span></li>
+                    <div>
+                        <ul th:each="role : ${roles}" class="checkbox-list">
+                            <li><span th:href="@{|/roles/${role.id}|}" th:text="${role.name}" class="primary">Role</span></li>
                         </ul>
                     </div>
                     <div class="actions add-new-role">
-                        <input type="text" th:text="${name}" placeholder="New Role..."/>
-                        <a class="button" th:href="@{/roles}">Add</a>
+                        <input type="hidden" th:field="*{id}"/>
+                        <input type="text" th:field="*{name}" placeholder="New Role..."/>
+                        <button type="submit" class="button">Add</button>
                     </div>
                 </form>
             </div>
