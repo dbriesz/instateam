@@ -21,11 +21,12 @@ public class RoleController {
     @SuppressWarnings("unchecked")
     @RequestMapping("/roles")
     public String listRoles(Model model) {
-        // Get all role from the database and store the list into the role variable
+        // Get all roles from the database and store the list into the role variable
         List<Role> roles = roleService.findAll();
 
         model.addAttribute("roles", roles);
 
+        // Add model attributes needed for new form
         model.addAttribute("role", new Role());
 
         return "role/index";
@@ -42,7 +43,7 @@ public class RoleController {
     }
 
 /*
-    // Form for adding a new project
+    // Form for adding a new role
     @RequestMapping("roles/add")
     public String formNewRole(Model model) {
         // TODO: Add model attributes needed for new form
