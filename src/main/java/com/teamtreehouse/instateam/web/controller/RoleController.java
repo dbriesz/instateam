@@ -5,10 +5,12 @@ import com.teamtreehouse.instateam.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -25,7 +27,6 @@ public class RoleController {
 
         model.addAttribute("roles", roles);
 
-        // TODO: Add model attributes needed for new form
         model.addAttribute("role", new Role());
 
         return "role/index";
@@ -40,14 +41,6 @@ public class RoleController {
         model.addAttribute("role", role);
         return "role/index";
     }
-
-/*    // Form for adding a new role
-    @RequestMapping("/roles/add")
-    public String formNewRole(Model model) {
-
-
-        return "role/index";
-    }*/
 
     // Form for editing an existing role
     @RequestMapping("roles/{roleId}/edit")
@@ -68,8 +61,11 @@ public class RoleController {
 
     // Add a role
     @RequestMapping(value = "/roles", method = RequestMethod.POST)
-    public String addRole(Role role) {
+    public String addRole(@Valid Role role, BindingResult result) {
         // TODO: Add role if valid data was received
+        if(result.hasErrors()) {
+            return "redirect:/roles";
+        }
         roleService.save(role);
 
         // TODO: Redirect browser to /roles
