@@ -36,8 +36,8 @@
                     </div>
                     <div class="actions add-new-role">
                         <input type="hidden" th:field="*{id}"/>
-                        <input type="text" th:field="*{name}" placeholder="New Role..."/>
-                        <button type="submit" class="button">Add</button>
+                        <input type="text" th:text="*{name}" placeholder="New Role"/>
+                        <a type="submit" class="button">Add</a>
                     </div>
                 </form>
             </div>

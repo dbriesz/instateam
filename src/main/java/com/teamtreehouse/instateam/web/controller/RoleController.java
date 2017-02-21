@@ -24,6 +24,10 @@ public class RoleController {
         List<Role> roles = roleService.findAll();
 
         model.addAttribute("roles", roles);
+
+        // TODO: Add model attributes needed for new form
+        model.addAttribute("role", new Role());
+
         return "role/index";
     }
 
@@ -37,14 +41,13 @@ public class RoleController {
         return "role/index";
     }
 
-    // Form for adding a new role
-    @RequestMapping("roles/add")
+/*    // Form for adding a new role
+    @RequestMapping("/roles/add")
     public String formNewRole(Model model) {
-        // TODO: Add model attributes needed for new form
-        model.addAttribute("role", new Role());
+
 
         return "role/index";
-    }
+    }*/
 
     // Form for editing an existing role
     @RequestMapping("roles/{roleId}/edit")
