@@ -45,8 +45,8 @@
                         <input type="text" th:field="*{name}" placeholder="Name..."/>
                         <div class="custom-select">
                             <span class="dropdown-arrow"></span>
-                            <select th:value="${collaborator.role}">
-                                <!--<option value="" disabled="disabled">Role...</option>-->
+                            <select th:field="*{role.id}">
+                                <option value="" disabled="disabled">Role...</option>
                                 <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}">Role</option>
                             </select>
                         </div>
