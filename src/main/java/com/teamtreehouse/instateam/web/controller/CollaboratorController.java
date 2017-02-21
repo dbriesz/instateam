@@ -26,7 +26,7 @@ public class CollaboratorController {
     @SuppressWarnings("unchecked")
     @RequestMapping("/collaborators")
     public String listCollaborators(Model model) {
-        // Get all collaborator from the database and store the list into the collaborator variable
+        // Get all collaborators from the database and store the list into the collaborator variable
         List<Collaborator> collaborators = collaboratorService.findAll();
 
         model.addAttribute("collaborators", collaborators);

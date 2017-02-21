@@ -29,13 +29,13 @@
             <div class="container wrapper">
                 <form th:action="@{/collaborators}" method="post" th:object="${collaborator}">
                     <h2>Manage Collaborators</h2>
-                    <ul th:each="collaborator : ${collaborator}" class="checkbox-list">
+                    <ul th:each="collaborator : ${collaborators}" class="checkbox-list">
                         <li>
                             <span th:href="@{|/collaborators/${collaborator.id}|}" th:text="${collaborator.name}" class="primary">Collaborator Name</span>
                             <div class="custom-select">
                                 <span class="dropdown-arrow"></span>
-                                <select th:field="*{collaborator.role}">
-                                    <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}" selected>Role</option>
+                                <select>
+                                    <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}">Role</option>
                                 </select>
                             </div>
                         </li>
@@ -45,8 +45,8 @@
                         <input type="text" th:field="*{name}" placeholder="Name..."/>
                         <div class="custom-select">
                             <span class="dropdown-arrow"></span>
-                            <select>
-                                <option value="" disabled="disabled" selected>Role...</option>
+                            <select th:value="${collaborator.role}">
+                                <!--<option value="" disabled="disabled">Role...</option>-->
                                 <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}">Role</option>
                             </select>
                         </div>
