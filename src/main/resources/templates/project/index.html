@@ -1,43 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="utf-8"/>
-        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-        <title>InstaTeam</title>
-        <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'/>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-        <link rel="stylesheet" th:href="@{normalize.css}"/>
-        <link rel="stylesheet" th:href="@{site.css}"/>
-    </head>
+    <head th:replace="layout :: head('add project')"></head>
     <body>
-        <header>
-            <div class="container">
-                <div class="site-header">
-                    <a class="logo" th:href="@{/}">InstaTeam</a>
-                    <a class="new-project button icon-left" th:href="@{/projects/add}"><i class="material-icons">add</i> New Project</a>
-                </div>
-            </div>
-        </header>
-        <nav>
-            <ul>
-                <li class="selected"><a th:href="@{/projects/add}">Projects</a></li>
-                <li><a th:href="@{/collaborators}">Collaborators</a></li>
-                <li><a th:href="@{/roles}">Roles</a></li>
-            </ul>
-        </nav>
+    <div th:replace="layout :: header"></div>
+    <div th:replace="layout :: nav"></div>
         <section>
             <div class="container wrapper">
                 <form th:action="@{/projects/add}" method="post" th:object="${project}">
-                    <div>
+                    <div class="actions add-new-project">
                         <input type="hidden" th:field="*{id}"/>
                         <label for="project_name"> Project Name:</label>
                         <input type="text" th:field="*{name}" name="project_name"/>
                     </div>
-                    <div>
+                    <div class="actions add-new-project">
                         <label for="project_description">Project Description:</label>
                         <textarea th:field="*{description}" rows="4" name="project_description"></textarea>
                     </div>
-                    <div>
+                    <div class="actions add-new-project">
                         <label for="project_status">Project Status:</label>
                         <div class="custom-select">
                         <span class="dropdown-arrow"></span>
@@ -45,10 +24,10 @@
                                 <option th:classappend="${#strings.toLowerCase(project.status)}" value="active">Active</option>
                                 <option th:classappend="${#strings.toLowerCase(project.status)}" value="archived">Archived</option>
                                 <option th:classappend="${#strings.toLowerCase(project.status)}" value="not_started">Not Started</option>
-=                            </select>
+                            </select>
                         </div>
                     </div>
-                    <div>
+                    <div class="actions add-new-project">
                         <label for="project_roles">Project Roles:</label>
                         <ul class="checkbox-list">
                             <li th:field="*{role.id}">
@@ -57,7 +36,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="actions">
+                    <div class="actions add-new-project">
                         <button type="submit" class="button">Save</button>
                         <a th:href="@{/}" class="button button-secondary">Cancel</a>
                     </div>

@@ -393,14 +393,23 @@ form .add-new-collaborator input {
 	width: calc(50% - 70px);
 	margin: 0 10px 10px 0;
 	float: left;
+}form .add-new-project input {
+	width: calc(50% - 70px);
+	margin: 0 10px 10px 0;
+	float: left;
 }
 form .add-new-collaborator .custom-select {
 	width: calc(50% - 40px);
 	margin: 0 10px 10px 0;
 	float: left;
+}form .add-new-project .custom-select {
+	width: calc(50% - 40px);
+	margin: 0 10px 10px 0;
+	float: left;
 }
 form .add-new-role .button,
-form .add-new-collaborator .button {
+form .add-new-collaborator .button,
+form .add-new-project .button {
 	/*width: 30px;*/
 	text-align: center;
 	float: left;
