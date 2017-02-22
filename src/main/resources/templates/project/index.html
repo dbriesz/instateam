@@ -13,24 +13,25 @@
         <header>
             <div class="container">
                 <div class="site-header">
-                    <a class="logo" href="../index.html">InstaTeam</a>
-                    <a class="new-project button icon-left" href="/projects/add"><i class="material-icons">add</i> New Project</a>
+                    <a class="logo" th:href="@{/}">InstaTeam</a>
+                    <a class="new-project button icon-left" th:href="@{/projects/add}"><i class="material-icons">add</i> New Project</a>
                 </div>
             </div>
         </header>
         <nav>
             <ul>
-                <li class="selected"><a href="../index.html">Projects</a></li>
-                <li><a href="../collaborator/index.html">Collaborators</a></li>
-                <li><a href="../role/index.html">Roles</a></li>
+                <li class="selected"><a th:href="@{/projects/add}">Projects</a></li>
+                <li><a th:href="@{/collaborators}">Collaborators</a></li>
+                <li><a th:href="@{/roles}">Roles</a></li>
             </ul>
         </nav>
         <section>
             <div class="container wrapper">
-                <form th:action="@{/projects}" method="post" th:object="${project}">
+                <form th:action="@{/projects/add}" method="post" th:object="${project}">
                     <div>
+                        <input type="hidden" th:field="*{id}"/>
                         <label for="project_name"> Project Name:</label>
-                        <input type="text" th:field="*{name}" name="project_name">
+                        <input type="text" th:field="*{name}" name="project_name"/>
                     </div>
                     <div>
                         <label for="project_description">Project Description:</label>
@@ -41,36 +42,24 @@
                         <div class="custom-select">
                         <span class="dropdown-arrow"></span>
                             <select th:field="*{status}" name="project_status">
-                                <option th:value="active" th:text="Active">Active</option>
-                                <option th:value="archived" th:text="Archived">Archived</option>
-                                <option th:value="not_started" th:text="Not Started">Not Started</option>
+                                <option th:classappend="${#strings.toLowerCase(project.status)}" value="active">Active</option>
+                                <option th:classappend="${#strings.toLowerCase(project.status)}" value="archived">Archived</option>
+                                <option th:classappend="${#strings.toLowerCase(project.status)}" value="not_started">Not Started</option>
 =                            </select>
                         </div>
                     </div>
                     <div>
                         <label for="project_roles">Project Roles:</label>
                         <ul class="checkbox-list">
-                            <li>
-                                <input type="checkbox" name="project_roles" value="Developer"/>
-                                <span class="primary"> Developer</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="project_roles" value="Designer"/>
-                                <span class="primary"> Designer</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="project_roles" value="QA"/>
-                                <span class="primary"> QA</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="project_roles" value="DevOps"/>
-                                <span class="primary"> DevOps</span>
+                            <li th:field="*{role.id}">
+                                <input type="checkbox" name="project_roles" th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"/>
+                                <span class="primary"> Role</span>
                             </li>
                         </ul>
                     </div>
                     <div class="actions">
-                        <input type="submit" value="Save" class="button"/>
-                        <a href="#" class="button button-secondary">Cancel</a>
+                        <button type="submit" class="button">Save</button>
+                        <a th:href="@{/}" class="button button-secondary">Cancel</a>
                     </div>
                 </form>
             </div>
