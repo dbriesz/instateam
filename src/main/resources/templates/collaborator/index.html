@@ -32,12 +32,12 @@
                     <ul th:each="collaborator : ${collaborators}" class="checkbox-list">
                         <li>
                             <span th:href="@{|/collaborators/${collaborator.id}|}" th:text="${collaborator.name}" class="primary">Collaborator Name</span>
-                            <div class="custom-select">
-                                <span class="dropdown-arrow"></span>
+                            <span th:href="@{|/collaborators/${collaborator.id}|}" th:text="${role.name}">Role</span>
+<!--                            <div class="custom-select">
                                 <select>
                                     <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}">Role</option>
                                 </select>
-                            </div>
+                            </div>-->
                         </li>
                     </ul>
                     <div class="actions add-new-collaborator">
