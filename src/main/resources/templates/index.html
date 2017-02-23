@@ -8,9 +8,9 @@
             <div class="container wrapper">
                 <div class="project-list">
                     <div th:each="project : ${projects}" class="project">
-                        <h2><a th:href="@{|/projects/${project.id}|}" th:text="${project.name}">Website Project</a></h2>
-                        <p th:href="@{|/projects/${project.id}|}" th:text="${project.description}">Design and build a custom website</p>
-                        <span th:href="@{|/projects/${project.id}|}" th:class="tag" th:classappend="${#strings.toLowerCase(project.status)}" th:text="${#strings.toUpperCase(project.status)}">Active</span>
+                        <h2><a th:href="@{|/projects/${project.id}|}" th:text="${project.name}">Project Name</a></h2>
+                        <p th:href="@{|/projects/${project.id}|}" th:text="${project.description}">Description</p>
+                        <span th:href="@{|/projects/${project.id}|}" th:class="tag" th:classappend="${#strings.toLowerCase(project.status)}" th:text="${#strings.toUpperCase(project.status).replace('_', ' ')}">Status</span>
                     </div>
                 </div>
             </div>

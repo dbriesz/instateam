@@ -7,16 +7,16 @@
         <section>
             <div class="container wrapper">
                 <form th:action="@{/projects/add}" method="post" th:object="${project}">
-                    <div class="actions add-new-project">
-                        <input type="hidden" th:field="*{id}"/>
+                    <div>
                         <label for="project_name"> Project Name:</label>
+                        <input type="hidden" th:field="*{id}"/>
                         <input type="text" th:field="*{name}" name="project_name"/>
                     </div>
-                    <div class="actions add-new-project">
+                    <div>
                         <label for="project_description">Project Description:</label>
                         <textarea th:field="*{description}" rows="4" name="project_description"></textarea>
                     </div>
-                    <div class="actions add-new-project">
+                    <div>
                         <label for="project_status">Project Status:</label>
                         <div class="custom-select">
                         <span class="dropdown-arrow"></span>
@@ -27,16 +27,17 @@
                             </select>
                         </div>
                     </div>
-                    <div class="actions add-new-project">
+                    <div>
                         <label for="project_roles">Project Roles:</label>
                         <ul class="checkbox-list">
                             <li th:field="*{role.id}">
+                                <span class="primary">
                                 <input type="checkbox" name="project_roles" th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"/>
-                                <span class="primary"> Role</span>
+                                </span>
                             </li>
                         </ul>
                     </div>
-                    <div class="actions add-new-project">
+                    <div class="actions">
                         <button type="submit" class="button">Save</button>
                         <a th:href="@{/}" class="button button-secondary">Cancel</a>
                     </div>
