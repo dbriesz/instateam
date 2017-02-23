@@ -9,8 +9,8 @@
                 <form th:action="@{/collaborators}" method="post" th:object="${collaborator}">
                     <h2>Manage Collaborators</h2>
                     <ul th:each="collaborator : ${collaborators}" class="checkbox-list">
-                        <li>
-                            <span th:href="@{|/collaborators/${collaborator.id}|}" th:text="${collaborator.name}" class="primary">Collaborator Name</span>
+                        <li class="collaborator-list">
+                            <a th:href="@{|/collaborators/${collaborator.id}/edit|}" th:text="${collaborator.name}" class="primary">Collaborator Name</a>
                             <span th:text="${collaborator.role.name}">Role</span>
                         </li>
                     </ul>

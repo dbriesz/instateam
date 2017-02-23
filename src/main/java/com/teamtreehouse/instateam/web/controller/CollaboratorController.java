@@ -1,8 +1,10 @@
 package com.teamtreehouse.instateam.web.controller;
 
 import com.teamtreehouse.instateam.model.Collaborator;
+import com.teamtreehouse.instateam.model.Project;
 import com.teamtreehouse.instateam.model.Role;
 import com.teamtreehouse.instateam.service.CollaboratorService;
+import com.teamtreehouse.instateam.service.ProjectService;
 import com.teamtreehouse.instateam.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,9 @@ public class CollaboratorController {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private ProjectService projectService;
 
     // Index of all collaborators
     @SuppressWarnings("unchecked")
@@ -48,30 +53,26 @@ public class CollaboratorController {
         return "collaborator/details";
     }
 
-/*    // Form for adding a new collaborator
-    @RequestMapping("collaborators/add")
-    public String formNewCollaborator(Model model) {
-        // TODO: Add model attributes needed for new form
-        model.addAttribute("collaborator", new Collaborator());
-
-        return "collaborator/details";
-    }*/
-
     // Form for editing an existing collaborator
     @RequestMapping("collaborators/{collaboratorId}/edit")
     public String formEditCollaborator(@PathVariable Long collaboratorId, Model model) {
         // TODO: Add model attributes needed for edit form
+        model.addAttribute("collaborator", collaboratorService.findById(collaboratorId));
+        model.addAttribute("roles", roleService.findAll());
+        model.addAttribute("heading","Edit Collaborator");
+        model.addAttribute("submit","Update");
 
         return "collaborator/details";
     }
 
     // Update an existing collaborator
-    @RequestMapping(value = "/collaborators/{collaboratorId}", method = RequestMethod.POST)
-    public String updateCollaborator() {
+    @RequestMapping(value = "/collaborators/{collaboratorId}/edit", method = RequestMethod.POST)
+    public String updateCollaborator(@Valid Collaborator collaborator) {
         // TODO: Update collaborator if valid data was received
+        collaboratorService.save(collaborator);
 
         // TODO: Redirect browser to /collaborators
-        return null;
+        return "redirect:/collaborators";
     }
 
     // Add a collaborator

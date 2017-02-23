@@ -1,5 +1,6 @@
 package com.teamtreehouse.instateam.web.controller;
 
+import com.teamtreehouse.instateam.model.Collaborator;
 import com.teamtreehouse.instateam.model.Project;
 import com.teamtreehouse.instateam.model.Role;
 import com.teamtreehouse.instateam.service.ProjectService;
@@ -89,5 +90,13 @@ public class ProjectController {
 
         // TODO: Redirect browser to home page
         return null;
+    }
+
+    public List<Collaborator> findCollaboratorsForProject(Project project) {
+        return project.getCollaborators();
+    }
+
+    public List<Role> findRolesForProject(Project project) {
+        return project.getRolesNeeded();
     }
 }

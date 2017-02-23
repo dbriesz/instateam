@@ -263,7 +263,8 @@ strong {
 .role h2 {
 	margin-bottom: 3px;
 }
-.role-list a {
+.role-list a,
+.collaborator-list a {
 	display: block;
 	margin-right: 70px;
 	color: #444342;
