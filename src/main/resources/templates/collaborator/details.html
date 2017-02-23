@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout :: head('edit role')"></head>
+<head th:replace="layout :: head('edit collaborator')"></head>
 <body>
 <div th:replace="layout :: header"></div>
 <div th:replace="layout :: nav"></div>
@@ -8,7 +8,7 @@
     <div class="container wrapper">
         <form th:action="@{|/collaborators/${collaborator.id}/edit|}" method="post" th:object="${collaborator}">
             <h2 th:text="${heading}">Edit Collaborator</h2>
-            <div class="actions edit-role">
+            <div class="actions edit-collaborator">
                 <input type="hidden" th:field="*{id}"/>
                 <input type="text" th:field="*{name}" placeholder="Edit Role..."/>
                 <div class="custom-select">

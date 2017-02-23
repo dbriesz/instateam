@@ -270,10 +270,12 @@ strong {
 	color: #444342;
 	text-decoration: underline;
 }
-.role-list.single .role {
+.role-list.single .role,
+.collaborator-list.single .role {
 	border: 0;
 }
-.role-list.single .role h2 {
+.role-list.single .role h2,
+.collaborator-list.single .role h2 {
 	font-size: 32px;
 	margin-top: -4px;
 }
@@ -290,6 +292,7 @@ strong {
   position: relative;
   display: inline-block;
   margin-bottom: 30px;
+	margin-left: 5px;
 }
 .custom-select select {
   outline: none;
@@ -412,6 +415,12 @@ form .actions {
 form .add-new-role input,
 form .edit-role input{
 	width: calc(100% - 100px);
+	margin: 0 10px 10px 0;
+	float: left;
+}form .add-new-collaborator input,
+form .edit-collaborator input,
+form .collaborator input{
+	width: calc(100% - 300px);
 	margin: 0 10px 10px 0;
 	float: left;
 }
