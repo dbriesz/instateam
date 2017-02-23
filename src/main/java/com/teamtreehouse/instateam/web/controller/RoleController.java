@@ -42,23 +42,15 @@ public class RoleController {
         return "role/index";
     }
 
-/*
-    // Form for adding a new role
-    @RequestMapping("roles/add")
-    public String formNewRole(Model model) {
-        // TODO: Add model attributes needed for new form
-        model.addAttribute("role", new Role());
-
-        return "role/index";
-    }
-*/
-
     // Form for editing an existing role
     @RequestMapping("roles/{roleId}/edit")
     public String formEditRole(@PathVariable Long roleId, Model model) {
         // TODO: Add model attributes needed for edit form
+        model.addAttribute("role", roleService.findById(roleId));
+        model.addAttribute("heading","Edit Role");
+        model.addAttribute("submit","Update");
 
-        return "role/index";
+        return "role/details";
     }
 
     // Update an existing role

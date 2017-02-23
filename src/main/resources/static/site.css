@@ -215,7 +215,8 @@ strong {
 	position: relative;
 	padding: 35px 35px;
 }
-.project:last-child {
+.project:last-child,
+.role:last-child {
 	border: 0;
 }
 .project h2 {
@@ -253,6 +254,27 @@ strong {
 .secondary {
 	float: right;
 	color: #747372;
+}
+.role {
+	border-bottom: 1px solid #e1e0e0;
+	position: relative;
+	padding: 35px 35px;
+}
+.role h2 {
+	margin-bottom: 3px;
+}
+.role-list a {
+	display: block;
+	margin-right: 70px;
+	color: #444342;
+	text-decoration: underline;
+}
+.role-list.single .role {
+	border: 0;
+}
+.role-list.single .role h2 {
+	font-size: 32px;
+	margin-top: -4px;
 }
 
 
@@ -386,7 +408,8 @@ form .checkbox-list .custom-select {
 form .actions {
 	margin: 0 -35px;
 }
-form .add-new-role input {
+form .add-new-role input,
+form .edit-role input{
 	width: calc(100% - 100px);
 	margin: 0 10px 10px 0;
 	float: left;
@@ -402,6 +425,7 @@ form .add-new-collaborator .custom-select {
     float: left;
 }
 form .add-new-role .button,
+form .edit-role .button,
 form .add-new-collaborator .button {
 	/*width: 30px;*/
 	text-align: center;
