@@ -54,12 +54,13 @@ public class RoleController {
     }
 
     // Update an existing role
-    @RequestMapping(value = "/roles/{roleId}", method = RequestMethod.POST)
-    public String updateRole() {
+    @RequestMapping(value = "/roles/{roleId}/edit", method = RequestMethod.POST)
+    public String updateRole(@Valid Role role) {
         // TODO: Update role if valid data was received
+        roleService.save(role);
 
         // TODO: Redirect browser to /roles
-        return null;
+        return "redirect:/roles";
     }
 
     // Add a role
