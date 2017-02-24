@@ -20,6 +20,4 @@ Application uses server mode - in order to run, start the server first with the 
 
 java -cp h2*jar org.h2.tools.Server
 
-Once the browser window opens, add the following to the JDBC URL field: jdbc:h2:tcp://localhost/./data/instateam
-
 The user name and password fields are blank.
