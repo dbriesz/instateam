@@ -42,10 +42,7 @@ public class ProjectController {
         Project project = projectService.findById(projectId);
 
         model.addAttribute("project", project);
-/*
-        model.addAttribute("roleList", findRolesForProject(project));
-        model.addAttribute("collaboratorList", findCollaboratorsForProject(project));
-*/
+        model.addAttribute("collaborators", project.getCollaborators());
 
         return "project/details";
     }

@@ -8,9 +8,9 @@
             <div class="container wrapper">
                 <div class="project-list single">
                     <div class="project">
-                        <h2 th:href="@{|/projects/${project.id}|}" th:text="${project.name}">Project Name</h2>
-                        <p th:href="@{|/projects/${project.id}|}" th:text="${project.description}">Project Description</p>
-                        <span th:href="@{|/projects/${project.id}|}" th:class="tag" th:classappend="${#strings.toLowerCase(project.status)}" th:text="${#strings.toUpperCase(project.status).replace('_', ' ')}">Status</span>
+                        <h2 th:text="${project.name}">Project Name</h2>
+                        <p th:text="${project.description}">Project Description</p>
+                        <span th:class="tag" th:classappend="${#strings.toLowerCase(project.status)}" th:text="${#strings.toUpperCase(project.status).replace('_', ' ')}">Status</span>
                     </div>
                     <div class="roles-collaborators">
                         <h3>Roles &amp; Collaborators</h3>
@@ -20,8 +20,8 @@
                         </div>
                     </div>
                     <div class="actions">
-                        <a class="button" th:href="@{|/projects/${project.id}/edit|}">Edit Project</a>
-                        <a class="button" th:href="@{|/projects/${project.id}/project_collaborators|}">Edit Collaborators</a>
+                        <a class="button" th:action="@{|/projects/${project.id}/edit|}" th:href="@{|/projects/${project.id}/edit|}">Edit Project</a>
+                        <a class="button" th:action="@{|/projects/${project.id}/project_collaborators|}" th:href="@{|/projects/${project.id}/project_collaborators|}">Edit Collaborators</a>
                     </div>
                 </div>
             </div>
