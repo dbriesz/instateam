@@ -1,4 +1,4 @@
-package com.teamtreehouse.instateam;
+package com.teamtreehouse;
 
 import com.teamtreehouse.instateam.dao.CollaboratorDao;
 import com.teamtreehouse.instateam.dao.ProjectDao;
@@ -44,7 +44,7 @@ public class DataLoader implements ApplicationRunner{
                     collaboratorDao.findById((long) i))
             );
             project.setDescription("description");
-            project.setStatus("status");
+            project.setStatus("active");
 
             projectDao.save(project);
         }
