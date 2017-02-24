@@ -1,6 +1,7 @@
 package com.teamtreehouse.instateam.dao;
 
 import com.teamtreehouse.instateam.model.Collaborator;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

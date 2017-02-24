@@ -1,6 +1,7 @@
 package com.teamtreehouse.instateam.dao;
 
 import com.teamtreehouse.instateam.model.Project;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,9 @@ public class ProjectDaoImpl implements ProjectDao {
 
         // Find a project by id
         Project project = session.get(Project.class,id);
+
+        // Initialize collection of Collaborators
+        Hibernate.initialize(project.getCollaborators());
 
         // Close session
         session.close();

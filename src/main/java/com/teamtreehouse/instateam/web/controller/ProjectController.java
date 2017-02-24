@@ -106,8 +106,4 @@ public class ProjectController {
     public List<Collaborator> findCollaboratorsForProject(Project project) {
         return project.getCollaborators();
     }
-
-/*    public List<Role> findRolesForProject(Project project) {
-        return project.getRolesNeeded();
-    }*/
 }
