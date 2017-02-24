@@ -10,13 +10,13 @@
                     <div class="project">
                         <h2 th:href="@{|/projects/${project.id}|}" th:text="${project.name}">Project Name</h2>
                         <p th:href="@{|/projects/${project.id}|}" th:text="${project.description}">Project Description</p>
-                        <span th:href="@{|/projects/${project.id}|}" th:class="tag" th:classappend="${#strings.toLowerCase(project.status)}" th:text="${#strings.toUpperCase(project.status).replace('_', ' ')}"class="tag active">Status</span>
+                        <span th:href="@{|/projects/${project.id}|}" th:class="tag" th:classappend="${#strings.toLowerCase(project.status)}" th:text="${#strings.toUpperCase(project.status).replace('_', ' ')}">Status</span>
                     </div>
                     <div class="roles-collaborators">
                         <h3>Roles &amp; Collaborators</h3>
-                        <div th:each="collaborator : ${collaborators}" class="list-item">
-                            <span th:text="${roleList[_${role.id}_].name}" class="primary">Role</span>
-                            <span th:text="${collaboratorList[_${collaborator.id}_].name}" class="secondary">Collaborator Name</span>
+                        <div th:each="collaborator : ${project.collaborators}" class="list-item">
+                            <span th:text="${collaborator.role.name}" class="primary">Role</span>
+                            <span th:text="${collaborator.name}" class="secondary">Collaborator Name</span>
                         </div>
                     </div>
                     <div class="actions">

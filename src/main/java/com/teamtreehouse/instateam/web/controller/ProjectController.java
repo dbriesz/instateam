@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -41,8 +42,10 @@ public class ProjectController {
         Project project = projectService.findById(projectId);
 
         model.addAttribute("project", project);
+/*
         model.addAttribute("roleList", findRolesForProject(project));
         model.addAttribute("collaboratorList", findCollaboratorsForProject(project));
+*/
 
         return "project/details";
     }
@@ -103,11 +106,11 @@ public class ProjectController {
         return null;
     }
 
-    public List<Collaborator> findCollaboratorsForProject(Project project) {
+/*    public List<Collaborator> findCollaboratorsForProject(Project project) {
         return project.getCollaborators();
     }
 
     public List<Role> findRolesForProject(Project project) {
         return project.getRolesNeeded();
-    }
+    }*/
 }
