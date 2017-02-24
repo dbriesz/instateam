@@ -67,8 +67,10 @@ public class ProjectController {
     @RequestMapping("projects/{projectId}/edit")
     public String editProject(@PathVariable Long projectId, Model model) {
         // TODO: Add model attributes needed for edit form
+        model.addAttribute("project", projectService.findById(projectId));
+        model.addAttribute("roles", roleService.findAll());
 
-        return null;
+        return "project/edit_project";
     }
 
     // Edit project collaborators
@@ -81,11 +83,12 @@ public class ProjectController {
 
     // Update an existing project
     @RequestMapping(value = "/projects/{projectId}/edit", method = RequestMethod.POST)
-    public String updateProject() {
+    public String updateProject(@Valid Project project) {
         // TODO: Update project if valid data was received
+        projectService.save(project);
 
         // TODO: Redirect browser to home page
-        return null;
+        return String.format("redirect:/projects/%s", project.getId());
     }
 
     // Add a project
@@ -114,7 +117,7 @@ public class ProjectController {
 
         for (Role role : rolesNeeded) {
             for (Collaborator collaborator : collaborators) {
-                if (collaborator.getRole() == role) {
+                if (collaborators.contains(collaborator)) {
                     roleCollaboratorMap.put(role, collaborator);
                 }
             }

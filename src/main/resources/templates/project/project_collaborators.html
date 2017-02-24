@@ -6,13 +6,13 @@
     <div th:replace="layout :: nav"></div>
         <section>
             <div class="container wrapper">
-                <form th:action="@{|/projects/${project.id}/edit|}" method="post" th:object="${project}">
+                <form th:action="@{|/projects/${project.id}/collaborators|}" method="post" th:object="${project}">
                     <label th:text="${heading}">Edit Collaborators: Project Name</label>
                     <ul class="checkbox-list">
                         <li><span th:each="role : ${roles}" th:text="${role}" class="primary">Developer</span>
                             <div class="custom-select">
                                 <span class="dropdown-arrow"></span>
-                                <select th:action="@{|/collaborators/${collaborator.id}/edit|}" method="post" th:object="${collaborator}">
+                                <select>
                                     <option value="#">Michael Pemulis</option>
                                     <option value="#">Name</option>
                                 </select>
