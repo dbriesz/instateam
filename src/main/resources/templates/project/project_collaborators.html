@@ -6,7 +6,7 @@
     <div th:replace="layout :: nav"></div>
         <section>
             <div class="container wrapper">
-                <form>
+                <form th:action="@{|/projects/${project.id}/edit|}" method="post" th:object="${project}">
                     <label th:text="${heading}">Edit Collaborators: Project Name</label>
                     <ul class="checkbox-list">
                         <li><span th:each="role : ${roles}" th:text="${role}" class="primary">Developer</span>

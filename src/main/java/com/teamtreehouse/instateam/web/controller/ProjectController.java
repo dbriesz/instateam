@@ -41,6 +41,9 @@ public class ProjectController {
         Project project = projectService.findById(projectId);
 
         model.addAttribute("project", project);
+        model.addAttribute("roleList", findRolesForProject(project));
+        model.addAttribute("collaboratorList", findCollaboratorsForProject(project));
+
         return "project/details";
     }
 
@@ -61,11 +64,19 @@ public class ProjectController {
     public String editProject(@PathVariable Long projectId, Model model) {
         // TODO: Add model attributes needed for edit form
 
-        return "project/index";
+        return null;
+    }
+
+    // Edit project collaborators
+    @RequestMapping("projects/{projectId}/project_collaborators")
+    public String editProjectCollaborators(@PathVariable Long projectId, Model model) {
+        // TODO: Add model attributes needed for edit form
+
+        return "project/project_collaborators";
     }
 
     // Update an existing project
-    @RequestMapping(value = "/projects/{projectId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/projects/{projectId}/edit", method = RequestMethod.POST)
     public String updateProject() {
         // TODO: Update project if valid data was received
 
