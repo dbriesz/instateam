@@ -14,9 +14,9 @@
                     </div>
                     <div class="roles-collaborators">
                         <h3>Roles &amp; Collaborators</h3>
-                        <div th:each="collaborator : ${project.collaborators}" class="list-item">
-                            <span th:text="${collaborator.role.name}" class="primary">Role</span>
-                            <span th:text="${collaborator.name != null}? ${collaborator.name} : '([Unassigned])'" class="secondary">Collaborator Name</span>
+                        <div th:each="entry : ${rolesAssignment}" class="list-item">
+                            <span th:text="${entry.key.name}" class="primary">Role</span>
+                            <span th:text="${entry.value.name}" class="secondary">Collaborator Name</span>
                         </div>
                     </div>
                     <div class="actions">

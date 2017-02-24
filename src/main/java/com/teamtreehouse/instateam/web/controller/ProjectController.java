@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ProjectController {
@@ -41,8 +43,10 @@ public class ProjectController {
         // Get the project given by projectId
         Project project = projectService.findById(projectId);
 
+        Map<Role, Collaborator> rolesAssignment = getRoleCollaboratorMap(project);
+
         model.addAttribute("project", project);
-        model.addAttribute("collaborators", findCollaboratorsForProject(project));
+        model.addAttribute("rolesAssignment", rolesAssignment);
 
         return "project/details";
     }
@@ -103,7 +107,19 @@ public class ProjectController {
         return null;
     }
 
-    public List<Collaborator> findCollaboratorsForProject(Project project) {
-        return project.getCollaborators();
+    public Map<Role,Collaborator> getRoleCollaboratorMap(Project project) {
+        Map<Role, Collaborator> roleCollaboratorMap = new HashMap<>();
+        List<Role> rolesNeeded = project.getRolesNeeded();
+        List<Collaborator> collaborators = project.getCollaborators();
+
+        for (Role role : rolesNeeded) {
+            for (Collaborator collaborator : collaborators) {
+                if (collaborator.getRole() == role) {
+                    roleCollaboratorMap.put(role, collaborator);
+                }
+            }
+        }
+
+        return roleCollaboratorMap;
     }
 }
