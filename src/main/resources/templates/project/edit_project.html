@@ -6,7 +6,7 @@
 <div th:replace="layout :: nav"></div>
 <section>
     <div class="container wrapper">
-        <form th:action="@{|/projects/${project.id}/edit|}" method="post" th:object="${project}">
+        <form th:action="@{${action}}" method="post" th:object="${project}">
             <div>
                 <input type="hidden" th:field="*{id}"/>
                 <label for="project_name"> Project Name:</label>
@@ -39,7 +39,7 @@
             </div>
             <div class="actions">
                 <button type="submit" class="button">Save</button>
-                <a th:href="@{|/projects/${project.id}/edit|}" class="button button-secondary">Cancel</a>
+                <a th:href="@{${action}}" class="button button-secondary">Cancel</a>
             </div>
         </form>
     </div>

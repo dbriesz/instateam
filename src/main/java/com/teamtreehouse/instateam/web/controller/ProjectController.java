@@ -8,15 +8,13 @@ import com.teamtreehouse.instateam.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class ProjectController {
@@ -56,11 +54,12 @@ public class ProjectController {
     public String formNewProject(Model model) {
         // Add model attributes needed for new form
         model.addAttribute("project", new Project());
+        model.addAttribute("action", "/projects/add");
 
-        model.addAttribute("role", new Role());
+//        model.addAttribute("role", new Role());
         model.addAttribute("roles", roleService.findAll());
 
-        return "project/index";
+        return "project/edit_project";
     }
 
     // Edit an existing project
@@ -69,6 +68,8 @@ public class ProjectController {
         // TODO: Add model attributes needed for edit form
         model.addAttribute("project", projectService.findById(projectId));
         model.addAttribute("roles", roleService.findAll());
+        model.addAttribute("action", String.format("/projects/%s/edit", projectId));
+//        model.addAttribute("checkedRolesNeeded", checkedRolesNeeded(projectService.findById(projectId)));
 
         return "project/edit_project";
     }
@@ -93,11 +94,15 @@ public class ProjectController {
 
     // Add a project
     @RequestMapping(value = "/projects/add", method = RequestMethod.POST)
-    public String addProject(@Valid Project project) {
-        // TODO: Add project if valid data was received
-        projectService.save(project);
+    public String addProject(@Valid Project project, BindingResult result) {
+        // Add project if valid data was received
+        if (result.hasErrors()) {
+            System.out.println(result.getAllErrors());
+        } else {
+            projectService.save(project);
+        }
 
-        // TODO: Redirect browser to home page
+        // Redirect browser to home page
         return "redirect:/";
     }
 
@@ -110,19 +115,31 @@ public class ProjectController {
         return null;
     }
 
-    public Map<Role,Collaborator> getRoleCollaboratorMap(Project project) {
-        Map<Role, Collaborator> roleCollaboratorMap = new HashMap<>();
+    private Map<Role, Collaborator> getRoleCollaboratorMap(Project project) {
         List<Role> rolesNeeded = project.getRolesNeeded();
         List<Collaborator> collaborators = project.getCollaborators();
+        Map<Role, Collaborator> roleCollaborator = new LinkedHashMap<>();
 
-        for (Role role : rolesNeeded) {
-            for (Collaborator collaborator : collaborators) {
-                if (rolesNeeded.contains(role) && collaborator.getRole() == role) {
-                    roleCollaboratorMap.put(role, collaborator);
-                }
-            }
+        for (Role roleNeeded : rolesNeeded) {
+            roleCollaborator.put(roleNeeded,
+                    collaborators.stream()
+                            .filter((col) -> col.getRole().getId().equals(roleNeeded.getId()))
+                            .findFirst()
+                            .orElseGet(() -> {
+                                Collaborator unassigned = new Collaborator();
+                                unassigned.setName("[Unassigned]");
+                                return unassigned;
+                            }));
         }
-
-        return roleCollaboratorMap;
+        return roleCollaborator;
     }
+
+/*    private Role[] checkedRolesNeeded(Project project) {
+        Role[] rolesNeeded = new Role[project.getRolesNeeded().size()];
+        for (Role role : rolesNeeded) {
+
+        }
+        project.getRolesNeeded().add(rolesNeeded);
+        return rolesNeeded;
+    }*/
 }
