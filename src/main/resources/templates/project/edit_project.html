@@ -30,9 +30,9 @@
             <div>
                 <label for="project_roles">Project Roles:</label>
                 <ul class="checkbox-list">
-                    <li th:field="*{project.role}">
+                    <li th:field="*{project.role}" th:each="role : ${roles}">
                         <span class="primary">
-                        <input type="checkbox" name="project_roles"  th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"/>
+                        <input th:type="checkbox" name="project_roles" th:value="${role.id}" th:text="${role.name}"/>
                         </span>
                     </li>
                 </ul>
