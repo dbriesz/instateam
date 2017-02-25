@@ -30,16 +30,16 @@
             <div>
                 <label for="project_roles">Project Roles:</label>
                 <ul class="checkbox-list">
-                    <li th:field="*{project.role}" th:each="role : ${roles}">
+                    <li th:each="role : ${roles}">
                         <span class="primary">
-                        <input th:type="checkbox" name="project_roles" th:value="${role.id}" th:text="${role.name}"/>
+                        <input type="checkbox" th:field="*{rolesNeeded}" value="${role.id}" th:text="${role.name}"/>
                         </span>
                     </li>
                 </ul>
             </div>
             <div class="actions">
                 <button type="submit" class="button">Save</button>
-                <a th:href="@{|/projects/${project.id}|}" class="button button-secondary">Cancel</a>
+                <a th:href="@{|/projects/${project.id}/edit|}" class="button button-secondary">Cancel</a>
             </div>
         </form>
     </div>
