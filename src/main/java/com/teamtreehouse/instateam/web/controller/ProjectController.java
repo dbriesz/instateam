@@ -117,7 +117,7 @@ public class ProjectController {
 
         for (Role role : rolesNeeded) {
             for (Collaborator collaborator : collaborators) {
-                if (collaborators.contains(collaborator)) {
+                if (rolesNeeded.contains(role) && collaborator.getRole() == role) {
                     roleCollaboratorMap.put(role, collaborator);
                 }
             }
