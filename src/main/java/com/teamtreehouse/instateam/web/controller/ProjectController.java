@@ -146,9 +146,7 @@ public class ProjectController {
         List<Boolean> checkedValues = new ArrayList<>();
         for (Role role : allRoles) {
             for (Role projectRole : projectRoles) {
-                if (role.equals(projectRole)) {
-                    checkedValues.add(projectRoles.contains(role));
-                }
+                checkedValues.add(projectRoles.contains(role));
             }
         }
 

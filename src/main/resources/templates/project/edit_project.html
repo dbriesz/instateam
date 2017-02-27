@@ -32,7 +32,7 @@
                 <ul class="checkbox-list">
                     <li th:each="role, roleStat : ${roles}">
                         <span class="primary">
-                        <input type="checkbox" th:field="*{rolesNeeded}" th:checked="${checkedValues[__${roleStat}__]} == true" th:value="${role.id}" th:text="${role.name}"/>
+                        <input type="checkbox" th:field="*{rolesNeeded}" th:checked="${checkedValues[roleStat.index]} == true" th:value="${role.id}" th:text="${role.name}"/>
                         </span>
                     </li>
                 </ul>
