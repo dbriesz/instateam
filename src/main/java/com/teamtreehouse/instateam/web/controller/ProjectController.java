@@ -70,10 +70,11 @@ public class ProjectController {
     @RequestMapping("projects/{projectId}/edit")
     public String editProject(@PathVariable Long projectId, Model model) {
         // TODO: Add model attributes needed for edit form
-        model.addAttribute("project", projectService.findById(projectId));
+        Project project = projectService.findById(projectId);
+        model.addAttribute("project", project);
         model.addAttribute("roles", roleService.findAll());
         model.addAttribute("action", String.format("/projects/%s/edit", projectId));
-        model.addAttribute("checkedValues", createCheckedPropertiesList(roleService.findAll(), projectService.findById(projectId).getRolesNeeded()));
+        model.addAttribute("checkedValues", createCheckedPropertiesList(roleService.findAll(), project.getRolesNeeded()));
 
         return "project/edit_project";
     }
@@ -146,7 +147,7 @@ public class ProjectController {
         for (Role role : allRoles) {
             for (Role projectRole : projectRoles) {
                 if (role.equals(projectRole)) {
-                    checkedValues.add(Boolean.TRUE);
+                    checkedValues.add(projectRoles.contains(role));
                 }
             }
         }
