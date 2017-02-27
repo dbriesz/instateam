@@ -142,12 +142,12 @@ public class ProjectController {
     }
 
     private List<Boolean> createCheckedPropertiesList(List<Role> allRoles, List<Role> projectRoles) {
-        int i = 0;
         List<Boolean> checkedValues = new ArrayList<>();
         for (Role role : allRoles) {
-            if (role.equals(projectRoles.get(i))) {
-                checkedValues.add(Boolean.TRUE);
-                i++;
+            for (Role projectRole : projectRoles) {
+                if (role.equals(projectRole)) {
+                    checkedValues.add(Boolean.TRUE);
+                }
             }
         }
 
