@@ -3,6 +3,7 @@ package com.teamtreehouse.instateam.web.controller;
 import com.teamtreehouse.instateam.model.Collaborator;
 import com.teamtreehouse.instateam.model.Project;
 import com.teamtreehouse.instateam.model.Role;
+import com.teamtreehouse.instateam.service.CollaboratorService;
 import com.teamtreehouse.instateam.service.ProjectService;
 import com.teamtreehouse.instateam.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class ProjectController {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private CollaboratorService collaboratorService;
 
     // Home page - index of all projects
     @RequestMapping("/")
@@ -69,7 +73,7 @@ public class ProjectController {
         model.addAttribute("project", projectService.findById(projectId));
         model.addAttribute("roles", roleService.findAll());
         model.addAttribute("action", String.format("/projects/%s/edit", projectId));
-//        model.addAttribute("checkedRolesNeeded", checkedRolesNeeded(projectService.findById(projectId)));
+        model.addAttribute("checkedValues", createCheckedPropertiesList(roleService.findAll(), projectService.findById(projectId).getRolesNeeded()));
 
         return "project/edit_project";
     }
@@ -78,6 +82,9 @@ public class ProjectController {
     @RequestMapping("projects/{projectId}/project_collaborators")
     public String editProjectCollaborators(@PathVariable Long projectId, Model model) {
         // TODO: Add model attributes needed for edit form
+        model.addAttribute("project", projectService.findById(projectId));
+        model.addAttribute("roles", roleService.findAll());
+        model.addAttribute("collaborators", collaboratorService.findAll());
 
         return "project/project_collaborators";
     }
@@ -134,12 +141,16 @@ public class ProjectController {
         return roleCollaborator;
     }
 
-/*    private Role[] checkedRolesNeeded(Project project) {
-        Role[] rolesNeeded = new Role[project.getRolesNeeded().size()];
-        for (Role role : rolesNeeded) {
-
+    private List<Boolean> createCheckedPropertiesList(List<Role> allRoles, List<Role> projectRoles) {
+        int i = 0;
+        List<Boolean> checkedValues = new ArrayList<>();
+        for (Role role : allRoles) {
+            if (role.equals(projectRoles.get(i))) {
+                checkedValues.add(Boolean.TRUE);
+                i++;
+            }
         }
-        project.getRolesNeeded().add(rolesNeeded);
-        return rolesNeeded;
-    }*/
+
+        return checkedValues;
+    }
 }
