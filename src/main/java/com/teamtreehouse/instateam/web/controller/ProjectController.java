@@ -73,13 +73,20 @@ public class ProjectController {
         // TODO: Add model attributes needed for edit form
         Project project = projectService.findById(projectId);
         List<Role> allRoles = roleService.findAll();
+        prepareProjectForDisplay(allRoles, project);
         model.addAttribute("project", project);
-//        model.addAttribute("roles", roleService.findAll());
         model.addAttribute("roles", allRoles);
         model.addAttribute("action", String.format("/projects/%s/edit", projectId));
-//        model.addAttribute("checkedValues", createCheckedPropertiesList(roleService.findAll(), project.getRolesNeeded()));
 
         return "project/edit_project";
+    }
+
+    private void prepareProjectForDisplay(List<Role> allRoles, Project project) {
+        List<Role> display = allRoles.stream()
+                .map(role -> project.getRolesNeeded().stream()
+                        .anyMatch(needed -> needed.getId().equals(role.getId())) ? role : null)
+                .collect(Collectors.toList());
+        project.setRolesNeeded(display);
     }
 
     // Edit project collaborators
