@@ -12,8 +12,8 @@
                         <li th:each="role : ${project.rolesNeeded}" th:value="${role.id}" th:text="${role.name}"><span class="primary">Developer</span>
                             <div class="custom-select">
                                 <span class="dropdown-arrow"></span>
-                                <select th:field="*{collaborator.id}">
-                                    <option th:each="collaborator : ${collaborators}" th:value="${collaborator.id}" th:text="${collaborator.name}">Collaborator Name</option>
+                                <select th:field="*{collaborators.collaborator.id}">
+                                    <option th:each="collaborator : ${collaborators}" th:value="${collaborator.id}" th:text="${collaborator.name}">Collaborator</option>
                                 </select>
                             </div>
                         </li>
