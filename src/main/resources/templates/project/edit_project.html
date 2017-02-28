@@ -32,14 +32,14 @@
                 <ul class="checkbox-list">
                     <li th:each="role, roleStat : ${roles}">
                         <span class="primary">
-                        <input type="checkbox" th:field="*{rolesNeeded}" th:checked="${checkedValues[roleStat.index]} == true" th:value="${role.id}" th:text="${role.name}"/>
+                        <input type="checkbox" th:field="*{rolesNeeded[__${roleStat.index}__].id}" th:value="${role.id}" th:text="${role.name}"/>
                         </span>
                     </li>
                 </ul>
             </div>
             <div class="actions">
                 <button type="submit" class="button">Save</button>
-                <a th:href="@{${action}}" class="button button-secondary">Cancel</a>
+                <a th:href="@{|/projects/${project.id}|}" class="button button-secondary">Cancel</a>
             </div>
         </form>
     </div>

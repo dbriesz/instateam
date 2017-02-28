@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="layout :: head('collaborator details')"></head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+    <head th:replace="layout :: head('edit collaborators')"></head>
     <body>
     <div th:replace="layout :: header"></div>
     <div th:replace="layout :: nav"></div>
@@ -9,46 +9,19 @@
                 <form th:action="@{|/projects/${project.id}/collaborators|}" method="post" th:object="${project}">
                     <label th:text="${heading}">Edit Collaborators: Project Name</label>
                     <ul class="checkbox-list">
-                        <li><span th:each="role : ${roles}" th:text="${role}" class="primary">Developer</span>
+                        <li th:each="role : ${rolesNeeded}"><span  th:field="*{rolesNeeded}" th:value="${role.id}" th:text="${role.name}" class="primary">Developer</span>
                             <div class="custom-select">
                                 <span class="dropdown-arrow"></span>
                                 <select>
-                                    <option value="#">Michael Pemulis</option>
-                                    <option value="#">Name</option>
-                                </select>
-                            </div>
-                        </li>
-                        <li><span class="primary">Designer</span>
-                            <div class="custom-select">
-                                <span class="dropdown-arrow"></span>
-                                <select>
-                                    <option value="#">Don Gately</option>
-                                    <option value="#">Name</option>
-                                </select>
-                            </div>
-                        </li>
-                        <li><span class="primary">QA</span>
-                            <div class="custom-select">
-                                <span class="dropdown-arrow"></span>
-                                <select>
-                                    <option value="#">Joelle Van Dyne</option>
-                                    <option value="#">Name</option>
-                                </select>
-                            </div>
-                        </li>
-                        <li><span class="primary">DevOps</span>
-                            <div class="custom-select">
-                                <span class="dropdown-arrow"></span>
-                                <select>
-                                    <option value="#">Choose...</option>
-                                    <option value="#">Name</option>
+                                    <!--<input type="hidden" th:value="${collaborator.id}"/>-->
+                                    <option th:each="collaborator : ${collaborators}" th:value="${collaborator.id}" th:text="${collaborator.name}">Collaborator Name</option>
                                 </select>
                             </div>
                         </li>
                     </ul>
                     <div class="actions">
-                        <input type="submit" value="Save" class="button"/>
-                        <a href="#" class="button button-secondary">Cancel</a>
+                        <button type="submit" class="button">Save</button>
+                        <a th:href="@{|/projects/${project.id}|}" class="button button-secondary">Cancel</a>
                     </div>
                 </form>
             </div>

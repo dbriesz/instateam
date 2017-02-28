@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class ProjectController {
@@ -71,21 +72,26 @@ public class ProjectController {
     public String editProject(@PathVariable Long projectId, Model model) {
         // TODO: Add model attributes needed for edit form
         Project project = projectService.findById(projectId);
+        List<Role> allRoles = roleService.findAll();
         model.addAttribute("project", project);
-        model.addAttribute("roles", roleService.findAll());
+//        model.addAttribute("roles", roleService.findAll());
+        model.addAttribute("roles", allRoles);
         model.addAttribute("action", String.format("/projects/%s/edit", projectId));
-        model.addAttribute("checkedValues", createCheckedPropertiesList(roleService.findAll(), project.getRolesNeeded()));
+//        model.addAttribute("checkedValues", createCheckedPropertiesList(roleService.findAll(), project.getRolesNeeded()));
 
         return "project/edit_project";
     }
 
     // Edit project collaborators
-    @RequestMapping("projects/{projectId}/project_collaborators")
+    @RequestMapping("projects/{projectId}/collaborators")
     public String editProjectCollaborators(@PathVariable Long projectId, Model model) {
         // TODO: Add model attributes needed for edit form
-        model.addAttribute("project", projectService.findById(projectId));
+        Project project = projectService.findById(projectId);
+        model.addAttribute("project", project);
         model.addAttribute("roles", roleService.findAll());
         model.addAttribute("collaborators", collaboratorService.findAll());
+        model.addAttribute("heading", String.format("Edit Collaborators: %s", project.getName()));
+        model.addAttribute("action", String.format("/projects/%s/collaborators", projectId));
 
         return "project/project_collaborators";
     }
@@ -93,6 +99,14 @@ public class ProjectController {
     // Update an existing project
     @RequestMapping(value = "/projects/{projectId}/edit", method = RequestMethod.POST)
     public String updateProject(@Valid Project project) {
+        // Coming back from form submission the Roles are not converted, they are objects with a single property
+        List<Role> cleanedRoles = project.getRolesNeeded().stream()
+                .map(Role::getId)
+                .filter(Objects::nonNull)
+                .map(roleService::findById)
+                .collect(Collectors.toList());
+        project.setRolesNeeded(cleanedRoles);
+
         // TODO: Update project if valid data was received
         projectService.save(project);
 
@@ -112,6 +126,16 @@ public class ProjectController {
 
         // Redirect browser to home page
         return "redirect:/";
+    }
+
+    // Update an existing project's collaborators
+    @RequestMapping(value = "/projects/{projectId}/collaborators", method = RequestMethod.POST)
+    public String updateProjectCollaborators(@Valid Project project) {
+        // TODO: Update project if valid data was received
+        projectService.save(project);
+
+        // TODO: Redirect browser to project details page
+        return String.format("redirect:/projects/%s", project.getId());
     }
 
     // Delete an existing project
@@ -142,14 +166,17 @@ public class ProjectController {
         return roleCollaborator;
     }
 
+/*
     private List<Boolean> createCheckedPropertiesList(List<Role> allRoles, List<Role> projectRoles) {
         List<Boolean> checkedValues = new ArrayList<>();
         for (Role role : allRoles) {
             for (Role projectRole : projectRoles) {
                 checkedValues.add(projectRoles.contains(role));
             }
+            checkedValues.add(projectRoles.contains(role));
         }
 
         return checkedValues;
     }
+*/
 }
