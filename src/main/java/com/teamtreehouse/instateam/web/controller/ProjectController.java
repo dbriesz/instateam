@@ -94,9 +94,12 @@ public class ProjectController {
     public String editProjectCollaborators(@PathVariable Long projectId, Model model) {
         // TODO: Add model attributes needed for edit form
         Project project = projectService.findById(projectId);
+        List<Role> allRoles = roleService.findAll();
+        List<Collaborator> allCollaborators = collaboratorService.findAll();
+
         model.addAttribute("project", project);
-        model.addAttribute("roles", roleService.findAll());
-        model.addAttribute("collaborators", collaboratorService.findAll());
+        model.addAttribute("roles", allRoles);
+        model.addAttribute("collaborators", allCollaborators);
         model.addAttribute("heading", String.format("Edit Collaborators: %s", project.getName()));
         model.addAttribute("action", String.format("/projects/%s/collaborators", projectId));
 
