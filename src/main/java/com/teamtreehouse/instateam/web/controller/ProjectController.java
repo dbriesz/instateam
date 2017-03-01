@@ -84,10 +84,10 @@ public class ProjectController {
     public String editProjectCollaborators(@PathVariable Long projectId, Model model) {
         // TODO: Add model attributes needed for edit form
         Project project = projectService.findById(projectId);
+        model.addAttribute("project", project);
         List<Role> allRoles = roleService.findAll();
         List<Collaborator> allCollaborators = collaboratorService.findAll();
 
-        model.addAttribute("project", project);
         model.addAttribute("roles", allRoles);
         model.addAttribute("collaborators", allCollaborators);
         model.addAttribute("heading", String.format("Edit Collaborators: %s", project.getName()));
@@ -122,9 +122,13 @@ public class ProjectController {
 
     // Update an existing project's collaborators
     @RequestMapping(value = "/projects/{projectId}/collaborators", method = RequestMethod.POST)
-    public String updateProjectCollaborators(@Valid Project project) {
+    public String updateProjectCollaborators(@Valid Project project, BindingResult result) {
         // TODO: Update project if valid data was received
-        projectService.save(project);
+        if (result.hasErrors()) {
+            System.out.println(result.getAllErrors());
+        } else {
+            projectService.save(project);
+        }
 
         // TODO: Redirect browser to project details page
         return String.format("redirect:/projects/%s", project.getId());
