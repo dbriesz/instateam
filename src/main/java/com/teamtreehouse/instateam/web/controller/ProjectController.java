@@ -73,7 +73,7 @@ public class ProjectController {
         // TODO: Add model attributes needed for edit form
         Project project = projectService.findById(projectId);
         List<Role> allRoles = roleService.findAll();
-        prepareProjectForDisplay(allRoles, project);
+//        prepareProjectForDisplay(allRoles, project);
         model.addAttribute("project", project);
         model.addAttribute("roles", allRoles);
         model.addAttribute("action", String.format("/projects/%s/edit", projectId));
@@ -81,6 +81,7 @@ public class ProjectController {
         return "project/edit_project";
     }
 
+/*
     private void prepareProjectForDisplay(List<Role> allRoles, Project project) {
         List<Role> display = allRoles.stream()
                 .map(role -> project.getRolesNeeded().stream()
@@ -88,6 +89,7 @@ public class ProjectController {
                 .collect(Collectors.toList());
         project.setRolesNeeded(display);
     }
+*/
 
     // Edit project collaborators
     @RequestMapping("projects/{projectId}/collaborators")
@@ -109,13 +111,13 @@ public class ProjectController {
     // Update an existing project
     @RequestMapping(value = "/projects/{projectId}/edit", method = RequestMethod.POST)
     public String updateProject(@Valid Project project) {
-        // Coming back from form submission the Roles are not converted, they are objects with a single property
+/*        // Coming back from form submission the Roles are not converted, they are objects with a single property
         List<Role> cleanedRoles = project.getRolesNeeded().stream()
                 .map(Role::getId)
                 .filter(Objects::nonNull)
                 .map(roleService::findById)
                 .collect(Collectors.toList());
-        project.setRolesNeeded(cleanedRoles);
+        project.setRolesNeeded(cleanedRoles);*/
 
         // TODO: Update project if valid data was received
         projectService.save(project);
