@@ -9,12 +9,11 @@
                 <form th:action="@{|/projects/${project.id}/collaborators|}" method="post" th:object="${project}">
                     <label th:text="${heading}">Edit Collaborators: Project Name</label>
                     <ul class="checkbox-list">
-                        <li><span th:each="role : ${project.rolesNeeded}" th:text="${role.name}" class="primary">Role</span>
+                        <li th:each="role : *{rolesNeeded}"><span th:text="${role.name}" class="primary">Role</span>
                             <div class="custom-select">
                                 <span class="dropdown-arrow"></span>
                                 <select th:field="*{collaborators}">
-                                    <!--<option value="" th:text="Choose...">Choose...</option>-->
-                                    <option th:each="collaborator : ${collaborators}" th:value="${collaborator.id}" th:text="${collaborator.name}">Collaborator Name</option>
+                                    <option th:each="collaborator : ${role.collaborators}" th:value="${collaborator.id}" th:text="${collaborator.name}">Collaborator Name</option>
                                 </select>
                             </div>
                         </li>
