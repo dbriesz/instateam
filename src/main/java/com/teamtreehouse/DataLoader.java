@@ -48,5 +48,14 @@ public class DataLoader implements ApplicationRunner{
 
             projectDao.save(project);
         }
+
+        Collaborator collaborator = new Collaborator();
+        collaborator.setName("Collaborator 6");
+        collaborator.setRole(roleDao.findById((long) 6));
+        collaboratorDao.save(collaborator);
+
+        collaborator = collaboratorDao.findById((long) 6);
+        collaborator.setRole(roleDao.findById((long) 1));
+        collaboratorDao.save(collaborator);
     }
 }

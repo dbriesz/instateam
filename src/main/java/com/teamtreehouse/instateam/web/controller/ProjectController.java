@@ -29,6 +29,7 @@ public class ProjectController {
     private CollaboratorService collaboratorService;
 
     // Home page - index of all projects
+    @SuppressWarnings("unchecked")
     @RequestMapping("/")
     public String listProjects(Model model) {
         // Get all projects from the database and store the list into the project variable
@@ -88,7 +89,9 @@ public class ProjectController {
     public String editProjectCollaborators(@PathVariable Long projectId, Model model) {
         // TODO: Add model attributes needed for edit form
         Project project = projectService.findById(projectId);
-        model.addAttribute("project", project);
+        if (!model.containsAttribute("project")) {
+            model.addAttribute("project", project);
+        }
 
         List<Role> allRoles = roleService.findAll();
         List<Collaborator> allCollaborators = collaboratorService.findAll();
@@ -127,15 +130,13 @@ public class ProjectController {
 
     // Update an existing project's collaborators
     @RequestMapping(value = "/projects/{projectId}/collaborators", method = RequestMethod.POST)
-    public String updateProjectCollaborators(Project project, BindingResult result) {
+    public String updateProjectCollaborators(@Valid Project project, BindingResult result) {
         // TODO: Update project if valid data was received
         if (result.hasErrors()) {
             System.out.println(result.getAllErrors());
         } else {
-/*
             Project originalProject = projectService.findById(project.getId());
             originalProject.setCollaborators(project.getCollaborators());
-*/
             projectService.save(project);
         }
 
