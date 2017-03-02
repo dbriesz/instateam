@@ -47,7 +47,7 @@ public class RoleController {
     // Form for editing an existing role
     @RequestMapping("roles/{roleId}/edit")
     public String formEditRole(@PathVariable Long roleId, Model model) {
-        // TODO: Add model attributes needed for edit form
+        // Add model attributes needed for edit form
         if (!model.containsAttribute("role")) {
             model.addAttribute("role", roleService.findById(roleId));
         }
@@ -60,20 +60,20 @@ public class RoleController {
     // Update an existing role
     @RequestMapping(value = "/roles/{roleId}/edit", method = RequestMethod.POST)
     public String updateRole(@Valid Role role) {
-        // TODO: Update role if valid data was received
+        // Update role if valid data was received
         roleService.save(role);
 
-        // TODO: Redirect browser to /roles
+        // Redirect browser to /roles
         return "redirect:/roles";
     }
 
     // Add a role
     @RequestMapping(value = "/roles", method = RequestMethod.POST)
     public String addRole(@Valid Role role) {
-        // TODO: Add role if valid data was received
+        // Add role if valid data was received
         roleService.save(role);
 
-        // TODO: Redirect browser to /roles
+        // Redirect browser to /roles
         return "redirect:/roles";
     }
 

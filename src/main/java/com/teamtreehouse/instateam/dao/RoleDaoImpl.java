@@ -21,7 +21,8 @@ public class RoleDaoImpl implements RoleDao {
         Session session = sessionFactory.openSession();
 
         // Get all role with a Hibernate criteria
-        List<Role> roles = session.createCriteria(Role.class).list();
+//        List<Role> roles = session.createCriteria(Role.class).list();
+        List<Role> roles = session.createQuery("SELECT r FROM Role r").list();
 
         // Close session
         session.close();

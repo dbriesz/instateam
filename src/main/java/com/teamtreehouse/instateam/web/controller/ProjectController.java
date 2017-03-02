@@ -72,7 +72,7 @@ public class ProjectController {
     // Edit an existing project
     @RequestMapping("projects/{projectId}/edit")
     public String editProject(@PathVariable Long projectId, Model model) {
-        // TODO: Add model attributes needed for edit form
+        // Add model attributes needed for edit form
         Project project = projectService.findById(projectId);
         if (!model.containsAttribute("project")) {
             model.addAttribute("project", project);
@@ -87,7 +87,7 @@ public class ProjectController {
     // Edit project collaborators
     @RequestMapping("projects/{projectId}/collaborators")
     public String editProjectCollaborators(@PathVariable Long projectId, Model model) {
-        // TODO: Add model attributes needed for edit form
+        // Add model attributes needed for edit form
         Project project = projectService.findById(projectId);
         if (!model.containsAttribute("project")) {
             model.addAttribute("project", project);
@@ -107,10 +107,10 @@ public class ProjectController {
     // Update an existing project
     @RequestMapping(value = "/projects/{projectId}/edit", method = RequestMethod.POST)
     public String updateProject(@Valid Project project) {
-        // TODO: Update project if valid data was received
+        // Update project if valid data was received
         projectService.save(project);
 
-        // TODO: Redirect browser to home page
+        // Redirect browser to home page
         return String.format("redirect:/projects/%s", project.getId());
     }
 
@@ -131,7 +131,7 @@ public class ProjectController {
     // Update an existing project's collaborators
     @RequestMapping(value = "/projects/{projectId}/collaborators", method = RequestMethod.POST)
     public String updateProjectCollaborators(@Valid Project project, BindingResult result) {
-        // TODO: Update project if valid data was received
+        // Update project if valid data was received
         if (result.hasErrors()) {
             System.out.println(result.getAllErrors());
         } else {
@@ -140,7 +140,7 @@ public class ProjectController {
             projectService.save(project);
         }
 
-        // TODO: Redirect browser to project details page
+        // Redirect browser to project details page
         return String.format("redirect:/projects/%s", project.getId());
     }
 

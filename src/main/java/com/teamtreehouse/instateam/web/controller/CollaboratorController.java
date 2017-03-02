@@ -58,7 +58,7 @@ public class CollaboratorController {
     // Form for editing an existing collaborator
     @RequestMapping("collaborators/{collaboratorId}/edit")
     public String formEditCollaborator(@PathVariable Long collaboratorId, Model model) {
-        // TODO: Add model attributes needed for edit form
+        // Add model attributes needed for edit form
         if (!model.containsAttribute("collaborator")) {
             model.addAttribute("collaborator", collaboratorService.findById(collaboratorId));
         }
@@ -72,20 +72,20 @@ public class CollaboratorController {
     // Update an existing collaborator
     @RequestMapping(value = "/collaborators/{collaboratorId}/edit", method = RequestMethod.POST)
     public String updateCollaborator(@Valid Collaborator collaborator) {
-        // TODO: Update collaborator if valid data was received
+        // Update collaborator if valid data was received
         collaboratorService.save(collaborator);
 
-        // TODO: Redirect browser to /collaborators
+        // Redirect browser to /collaborators
         return "redirect:/collaborators";
     }
 
     // Add a collaborator
     @RequestMapping(value = "/collaborators", method = RequestMethod.POST)
     public String addCollaborator(@Valid Collaborator collaborator) {
-        // TODO: Add collaborator if valid data was received
+        // Add collaborator if valid data was received
         collaboratorService.save(collaborator);
 
-        // TODO: Redirect browser to /collaborators
+        // Redirect browser to /collaborators
         return "redirect:/collaborators";
     }
 
