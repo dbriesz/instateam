@@ -85,6 +85,7 @@ public class ProjectController {
         // TODO: Add model attributes needed for edit form
         Project project = projectService.findById(projectId);
         model.addAttribute("project", project);
+
         List<Role> allRoles = roleService.findAll();
         List<Collaborator> allCollaborators = collaboratorService.findAll();
 
