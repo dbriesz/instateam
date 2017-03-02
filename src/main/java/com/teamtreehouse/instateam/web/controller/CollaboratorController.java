@@ -37,7 +37,9 @@ public class CollaboratorController {
         model.addAttribute("collaborators", collaborators);
 
         // Add model attributes needed for new form
-        model.addAttribute("collaborator", new Collaborator());
+        if (!model.containsAttribute("collaborator")) {
+            model.addAttribute("collaborator", new Collaborator());
+        }
         model.addAttribute("roles", roleService.findAll());
 
         return "collaborator/index";
@@ -57,7 +59,9 @@ public class CollaboratorController {
     @RequestMapping("collaborators/{collaboratorId}/edit")
     public String formEditCollaborator(@PathVariable Long collaboratorId, Model model) {
         // TODO: Add model attributes needed for edit form
-        model.addAttribute("collaborator", collaboratorService.findById(collaboratorId));
+        if (!model.containsAttribute("collaborator")) {
+            model.addAttribute("collaborator", collaboratorService.findById(collaboratorId));
+        }
         model.addAttribute("roles", roleService.findAll());
         model.addAttribute("heading","Edit Collaborator");
         model.addAttribute("submit","Update");

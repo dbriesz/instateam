@@ -57,7 +57,9 @@ public class ProjectController {
     @RequestMapping("projects/add")
     public String formNewProject(Model model) {
         // Add model attributes needed for new form
-        model.addAttribute("project", new Project());
+        if (!model.containsAttribute("project")) {
+            model.addAttribute("project", new Project());
+        }
         model.addAttribute("action", "/projects/add");
 
 //        model.addAttribute("role", new Role());
@@ -71,8 +73,10 @@ public class ProjectController {
     public String editProject(@PathVariable Long projectId, Model model) {
         // TODO: Add model attributes needed for edit form
         Project project = projectService.findById(projectId);
+        if (!model.containsAttribute("project")) {
+            model.addAttribute("project", project);
+        }
         List<Role> allRoles = roleService.findAll();
-        model.addAttribute("project", project);
         model.addAttribute("roles", allRoles);
         model.addAttribute("action", String.format("/projects/%s/edit", projectId));
 
