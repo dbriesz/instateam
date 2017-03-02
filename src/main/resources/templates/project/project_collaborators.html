@@ -7,6 +7,7 @@
         <section>
             <div class="container wrapper">
                 <form th:action="@{|/projects/${project.id}/collaborators|}" method="post" th:object="${project}">
+                    <input type="hidden" th:field="*{id}"/>
                     <label th:text="${heading}">Edit Collaborators: Project Name</label>
                     <ul class="checkbox-list">
                         <li th:each="role : *{rolesNeeded}"><span th:text="${role.name}" class="primary">Role</span>

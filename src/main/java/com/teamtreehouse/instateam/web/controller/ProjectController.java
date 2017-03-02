@@ -123,11 +123,15 @@ public class ProjectController {
 
     // Update an existing project's collaborators
     @RequestMapping(value = "/projects/{projectId}/collaborators", method = RequestMethod.POST)
-    public String updateProjectCollaborators(@Valid Project project, BindingResult result) {
+    public String updateProjectCollaborators(Project project, BindingResult result) {
         // TODO: Update project if valid data was received
         if (result.hasErrors()) {
             System.out.println(result.getAllErrors());
         } else {
+/*
+            Project originalProject = projectService.findById(project.getId());
+            originalProject.setCollaborators(project.getCollaborators());
+*/
             projectService.save(project);
         }
 
