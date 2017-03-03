@@ -11,7 +11,9 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 @Component
 public class DataLoader implements ApplicationRunner{
@@ -49,8 +51,36 @@ public class DataLoader implements ApplicationRunner{
             projectDao.save(project);
         }
 
-        Collaborator collaborator = collaboratorDao.findById((long) 1);
-        collaborator.setRole(roleDao.findById((long) 1));
+        Collaborator collaborator = collaboratorDao.findById(1L);
+        collaborator.setRole(roleDao.findById(1L));
         collaboratorDao.save(collaborator);
+
+        Project newProject = new Project();
+        newProject.setName("Project 6");
+        newProject.setRolesNeeded(Collections.singletonList(
+                roleDao.findById(1L)
+        ));
+        newProject.setCollaborators(Collections.singletonList(
+                collaboratorDao.findById(1L)
+        ));
+        newProject.setDescription("description");
+        newProject.setStatus("active");
+        projectDao.save(newProject);
+
+        Project finalProject = projectDao.findById(6L);
+
+        List<Collaborator> collaboratorList = finalProject.getCollaborators();
+
+        Collaborator newCollaborator = new Collaborator();
+        newCollaborator.setName("Collaborator 6");
+        newCollaborator.setRole(roleDao.findById(1L));
+        collaboratorDao.save(newCollaborator);
+        collaboratorList.add(newCollaborator);
+
+        finalProject.setCollaborators(collaboratorList);
+        projectDao.save(newProject);
+        finalProject = projectDao.findById(6L);
+
+        List<Collaborator> finalList = finalProject.getCollaborators();
     }
 }

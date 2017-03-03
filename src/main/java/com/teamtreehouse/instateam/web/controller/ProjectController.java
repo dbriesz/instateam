@@ -108,6 +108,9 @@ public class ProjectController {
     @RequestMapping(value = "/projects/{projectId}/edit", method = RequestMethod.POST)
     public String updateProject(@Valid Project project) {
         // Update project if valid data was received
+        Project originalProject = projectService.findById(project.getId());
+        originalProject.setRolesNeeded(project.getRolesNeeded());
+        originalProject.setCollaborators(project.getCollaborators());
         projectService.save(project);
 
         // Redirect browser to home page
@@ -136,6 +139,7 @@ public class ProjectController {
             System.out.println(result.getAllErrors());
         } else {
             Project originalProject = projectService.findById(project.getId());
+            originalProject.setRolesNeeded(project.getRolesNeeded());
             originalProject.setCollaborators(project.getCollaborators());
             projectService.save(project);
         }
