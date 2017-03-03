@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head('edit project')"></head>
+<body>
+<div th:replace="layout :: header"></div>
+<div th:replace="layout :: nav"></div>
+<section>
+    <div class="container wrapper">
+        <form th:action="@{${action}}" method="post" th:object="${project}">
+            <div>
+                <input type="hidden" th:field="*{id}"/>
+                <ul style="display: none">
+                    <li th:each="colab: *{collaborators}">
+                        <input type="hidden" th:field="*{collaborators[__${colabStat.index}__].id}" th:value="${colab.id}"/>
+                    </li>
+                </ul>
+                <label for="project_name"> Project Name:</label>
+                <input type="text" th:field="*{name}" name="project_name"/>
+            </div>
+            <div>
+                <label for="project_description">Project Description:</label>
+                <textarea rows="4" th:field="*{description}" name="project_description"></textarea>
+            </div>
+            <div>
+                <label for="project_status">Project Status:</label>
+                <div class="custom-select">
+                    <span class="dropdown-arrow"></span>
+                    <select th:field="*{status}" name="project_status">
+                        <option th:classappend="${#strings.toLowerCase(project.status)}" value="active">Active</option>
+                        <option th:classappend="${#strings.toLowerCase(project.status)}" value="archived">Archived</option>
+                        <option th:classappend="${#strings.toLowerCase(project.status)}" value="not_started">Not Started</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <label for="project_roles">Project Roles:</label>
+                <ul class="checkbox-list">
+                    <li th:each="role, roleStat : ${roles}">
+                        <input type="checkbox" th:field="*{rolesNeeded}" th:value="${role.id}"/>
+                        <span class="primary" th:text="${role.name}"></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="actions">
+                <button type="submit" class="button">Save</button>
+                <a th:href="@{/}" class="button button-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</section>
+</body>
+</html>

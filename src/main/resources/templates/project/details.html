@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout :: head('project details')"></head>
+    <body>
+    <div th:replace="layout :: header"></div>
+    <div th:replace="layout :: nav"></div>
+        <section>
+            <div class="container wrapper">
+                <div class="project-list single">
+                    <div class="project">
+                        <h2 th:text="${project.name}">Project Name</h2>
+                        <p th:text="${project.description}">Project Description</p>
+                        <span th:class="tag" th:classappend="${#strings.toLowerCase(project.status)}" th:text="${#strings.toUpperCase(project.status).replace('_', ' ')}">Status</span>
+                    </div>
+                    <div class="roles-collaborators">
+                        <h3>Roles &amp; Collaborators</h3>
+                        <div th:each="entry : ${rolesAssignment}" class="list-item">
+                            <span th:text="${entry.key.name}" class="primary">Role</span>
+                            <span th:text="${entry.value.name}" class="secondary">Collaborator Name</span>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <a class="button" th:action="@{|/projects/${project.id}/edit|}" th:href="@{|/projects/${project.id}/edit|}">Edit Project</a>
+                        <a class="button" th:action="@{|/projects/${project.id}/collaborators|}" th:href="@{|/projects/${project.id}/collaborators|}">Edit Collaborators</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

@@ -1,8 +1,12 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'eclipse'
+    id 'org.springframework.boot' version '1.4.3.RELEASE'
+}
+
 group 'com.teamtreehouse'
 version '1.0-SNAPSHOT'
-
-// Apply the Java plugin (expects src/main/java to be source folder)
-apply plugin: 'java'
 
 sourceCompatibility = 1.8
 
@@ -19,5 +23,4 @@ dependencies {
     compile 'org.hibernate:hibernate-core:5.1.0.Final'
     compile 'org.apache.tomcat:tomcat-dbcp:8.0.32'
     compile 'com.h2database:h2:1.4.191'
-    testCompile group: 'junit', name: 'junit', version: '4.11'
 }

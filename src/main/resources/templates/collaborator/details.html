@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head('edit collaborator')"></head>
+<body>
+<div th:replace="layout :: header"></div>
+<div th:replace="layout :: nav"></div>
+<section>
+    <div class="container wrapper">
+        <form th:action="@{|/collaborators/${collaborator.id}/edit|}" method="post" th:object="${collaborator}">
+            <h2 th:text="${heading}">Edit Collaborator</h2>
+            <div class="actions edit-collaborator">
+                <input type="hidden" th:field="*{id}"/>
+                <input type="text" th:field="*{name}" placeholder="Edit Role..."/>
+                <div class="custom-select">
+                    <span class="dropdown-arrow"></span>
+                    <select th:field="*{role.id}">
+                        <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}">Role</option>
+                    </select>
+                </div>
+                <button th:text="${submit}" type="submit" class="button">Update</button>
+            </div>
+        </form>
+    </div>
+</section>
+</body>
+</html>

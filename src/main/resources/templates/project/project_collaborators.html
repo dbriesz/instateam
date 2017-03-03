@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+    <head th:replace="layout :: head('edit collaborators')"></head>
+    <body>
+    <div th:replace="layout :: header"></div>
+    <div th:replace="layout :: nav"></div>
+        <section>
+            <div class="container wrapper">
+                <form th:action="@{|/projects/${project.id}/collaborators|}" method="post" th:object="${project}">
+                    <input type="hidden" th:field="*{id}"/>
+                    <input type="hidden" th:field="*{description}"/>
+                    <input type="hidden" th:field="*{name}"/>
+                    <input type="hidden" th:field="*{status}"/>
+                    <label th:text="${heading}">Edit Collaborators: Project Name</label>
+                    <ul class="checkbox-list">
+                        <li th:each="role : *{rolesNeeded}"><span th:text="${role.name}" class="primary">Role</span>
+                            <input type="hidden" th:field="*{rolesNeeded[__${roleStat.index}__].id}" th:value="${role.id}"/>
+                            <div class="custom-select">
+                                <span class="dropdown-arrow"></span>
+                                <select th:field="*{collaborators}">
+                                    <option th:each="collaborator : ${role.collaborators}" th:value="${collaborator.id}" th:text="${collaborator.name}">Collaborator Name</option>
+                                </select>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="actions">
+                        <button type="submit" class="button">Save</button>
+                        <a th:href="@{|/projects/${project.id}|}" class="button button-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </body>
+</html>

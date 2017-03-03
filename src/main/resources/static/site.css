@@ -189,6 +189,8 @@ strong {
 }
 .tag.archived {
 	background: #bbbab9;
+}.tag.not_started {
+	background: #ffa500;
 }
 .list-item {
 	border-top: 1px solid #e1e0e0;
@@ -213,7 +215,8 @@ strong {
 	position: relative;
 	padding: 35px 35px;
 }
-.project:last-child {
+.project:last-child,
+.role:last-child {
 	border: 0;
 }
 .project h2 {
@@ -252,6 +255,30 @@ strong {
 	float: right;
 	color: #747372;
 }
+.role {
+	border-bottom: 1px solid #e1e0e0;
+	position: relative;
+	padding: 35px 35px;
+}
+.role h2 {
+	margin-bottom: 3px;
+}
+.role-list a,
+.collaborator-list a {
+	display: block;
+	margin-right: 70px;
+	color: #444342;
+	text-decoration: underline;
+}
+.role-list.single .role,
+.collaborator-list.single .role {
+	border: 0;
+}
+.role-list.single .role h2,
+.collaborator-list.single .role h2 {
+	font-size: 32px;
+	margin-top: -4px;
+}
 
 
 
@@ -265,6 +292,7 @@ strong {
   position: relative;
   display: inline-block;
   margin-bottom: 30px;
+	margin-left: 5px;
 }
 .custom-select select {
   outline: none;
@@ -384,8 +412,15 @@ form .checkbox-list .custom-select {
 form .actions {
 	margin: 0 -35px;
 }
-form .add-new-role input {
+form .add-new-role input,
+form .edit-role input{
 	width: calc(100% - 100px);
+	margin: 0 10px 10px 0;
+	float: left;
+}form .add-new-collaborator input,
+form .edit-collaborator input,
+form .collaborator input{
+	width: calc(100% - 300px);
 	margin: 0 10px 10px 0;
 	float: left;
 }
@@ -395,13 +430,14 @@ form .add-new-collaborator input {
 	float: left;
 }
 form .add-new-collaborator .custom-select {
-	width: calc(50% - 40px);
-	margin: 0 10px 10px 0;
-	float: left;
+    width: calc(50% - 40px);
+    margin: 0 10px 10px 0;
+    float: left;
 }
 form .add-new-role .button,
+form .edit-role .button,
 form .add-new-collaborator .button {
-	width: 30px;
+	/*width: 30px;*/
 	text-align: center;
 	float: left;
 	margin: 0;
