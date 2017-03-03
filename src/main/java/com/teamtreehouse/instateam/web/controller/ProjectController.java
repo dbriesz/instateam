@@ -138,6 +138,13 @@ public class ProjectController {
         if (result.hasErrors()) {
             System.out.println(result.getAllErrors());
         } else {
+            List<Role> roles = project.getRolesNeeded();
+            List<Role> newRoles = new ArrayList<>();
+            for (Role role : roles) {
+                newRoles.add(roleService.findById(role.getId()));
+            }
+            project.setRolesNeeded(newRoles);
+
             Project originalProject = projectService.findById(project.getId());
             originalProject.setRolesNeeded(project.getRolesNeeded());
             originalProject.setCollaborators(project.getCollaborators());

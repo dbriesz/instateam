@@ -9,6 +9,11 @@
         <form th:action="@{${action}}" method="post" th:object="${project}">
             <div>
                 <input type="hidden" th:field="*{id}"/>
+                <ul style="display: none">
+                    <li th:each="colab: *{collaborators}">
+                        <input type="hidden" th:field="*{collaborators[__${colabStat.index}__].id}" th:value="${colab.id}"/>
+                    </li>
+                </ul>
                 <label for="project_name"> Project Name:</label>
                 <input type="text" th:field="*{name}" name="project_name"/>
             </div>
